@@ -1,11 +1,12 @@
 import React from 'react'
-import Content from '../Content/Content'
+import CardProduct from '../CardProduct/CardProduct'
 
 const Perfumaria = () => {
   return (
     <div className='content'>
         <h1>Aqui é perfumaria</h1>
-        <Content />
+        {/* <Content /> */}
+        <CardProduct typeProduct={'perfumaria'} />
     </div>
   )
 }

@@ -1,95 +1,114 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import axios from 'axios';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { BsFillCartPlusFill, BsFillCartCheckFill } from "react-icons/bs";
+import {getItem, setItem} from '../../services/LocalStorageFuncs'
+// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const ITEMS_PER_PAGE = 10;
+function CardProduct({ typeProduct }) {
+    const [cellPhones, setCellPhones] = useState([]);
+    const [page, setPage] = useState(1);
+    const [arrFiltrado, setArrFiltrado] = useState([]);
+    const [cart, setCart] = useState(getItem('cart') || []);
 
-const CardProduct = () => {
-  const [cellPhones, setCellPhones] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+    const MAX_LENGHT_PRODUCT = 20
 
-  useEffect(() => {
-    const fetchCellPhones = async () => {
-      try {
-        const response = await axios.get(
-          'https://api.mercadolibre.com/sites/MLB/search?q=celular'
-        );
-
-        setCellPhones(response.data.results);
-      } catch (error) {
-        console.error('Erro ao obter os celulares:', error);
-      }
+    const handleChange = (event, value) => {
+        setPage(value);
     };
 
-    fetchCellPhones();
-  }, []);
+    useEffect(() => {
+        const fetchCellPhones = async () => {
+            try {
+                const response = await axios.get(
+                    `https://api.mercadolibre.com/sites/MLB/search?q=${typeProduct}`
+                );
 
-  // Função para calcular a página inicial do slice (itens que serão mostrados na página)
-  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
-  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-  const currentItems = cellPhones.slice(indexOfFirstItem, indexOfLastItem);
+                setCellPhones(response.data.results);
+            } catch (error) {
+                console.error('Erro ao obter os celulares:', error);
+            }
+        };
 
-  // Função para mudar a página
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+        fetchCellPhones();
+    }, []);
 
-  return (
-    <>
-      {currentItems.map((cellPhone) => (
-        <div className="card p-2" style={{ width: '300px' }} key={cellPhone.id}>
-        <img className="w-75 mx-auto" src={cellPhone.thumbnail} alt=" logo da higia" />
-    
-        <div className="pt-3 mx-auto text-center">
-            <h5>{cellPhone.title}</h5>
-            <p>Qtd. {cellPhone.sold_quantity}</p>
-        </div>
-    
-        <div className="price text-center">
-            <h5>R$ {cellPhone.price}</h5>
-        </div>
-    
-        <button type="button" className="btn btn-success py-2">
-            Adicionar <ShoppingCartIcon />
-        </button>
-    </div>
-      ))}
+    const handleClick = (obj) => {
+        const element = cart.find((e) => e.id === obj.id)
+        if (element) {
+            const arrCarFilter = cart.filter((e) => e.id !== obj.id)
+            setCart(arrCarFilter)
+            setItem('cart', arrCarFilter)
+        } else {
+            setCart([...cart, obj])
+            setItem('cart', [...cart, obj])
+        }
+    }
 
-      <div className="text-center mt-4">
-        <ul className="pagination">
-          {Array.from({ length: Math.ceil(cellPhones.length / ITEMS_PER_PAGE) }).map((_, index) => (
-            <li key={index + 1} className={`page-item ${index + 1 === currentPage ? 'active' : ''}`}>
-              <button className="page-link" onClick={() => handlePageChange(index + 1)}>
-                {index + 1}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
-  );
+    useEffect(() => {
+        // Chamando a função para exibir os produtos em grupos de 10 (por exemplo).
+        exibirProdutosEmGrupos(MAX_LENGHT_PRODUCT);
+    }, [cellPhones]); // Executa novamente quando o estado 'cellPhones' é atualizado
+
+    function fatiarArrayEmGrupos(arr, tamanhoDoGrupo) {
+        const fatias = [];
+        for (let i = 0; i < arr.length; i += tamanhoDoGrupo) {
+            fatias.push(arr.slice(i, i + tamanhoDoGrupo));
+        }
+        setArrFiltrado(fatias);
+    }
+
+    // Função para exibir os produtos em grupos
+    function exibirProdutosEmGrupos(limitPorGrupo) {
+        try {
+            fatiarArrayEmGrupos(cellPhones, limitPorGrupo);
+        } catch (error) {
+            console.error('Erro ao obter e exibir produtos:', error);
+        }
+    }
+
+    return (
+        <Stack spacing={5}>
+            <div className="d-flex justify-content-center align-itens-center gap-5 flex-wrap mt-5">
+                {/* Renderizar o conteúdo de arrFiltrado aqui */}
+                {arrFiltrado[page - 1]?.map((produto) => (  // Note o page - 1, pois a página inicia em 1, mas o array é baseado em índices (que começam em 0).
+                    <div className="card p-2 d-flex flex-column justify-content-between" style={{ width: '300px' }} key={produto.id}>
+                        <img className="w-75 mx-auto" src={produto.thumbnail} alt=" logo da higia" />
+
+                        <div className="pt-3 mx-auto text-center">
+                            <h5>{produto.title}</h5>
+                            <p>Qtd. {produto.sold_quantity}</p>
+                        </div>
+
+                        <div className="price text-center">
+                            <h5>R$ {produto.price}</h5>
+                        </div>
+
+                        {
+                            cart.some((itemCart) => itemCart.id === produto.id) ? (
+                                <button type="button" className="btn btn-primary py-2 d-flex justify-content-center align-items-center gap-2"
+                                    onClick={() => handleClick(produto)}
+                                >
+                                    Adicionado
+                                    <BsFillCartCheckFill />
+                                </button>
+                            ) : (
+                                <button type="button" className="btn btn-success py-2 d-flex justify-content-center align-items-center gap-2"
+                                    onClick={() => handleClick(produto)}
+                                >
+                                    Adicionar
+                                    <BsFillCartPlusFill />
+                                </button>
+                            )
+                        }
+                    </div>
+                ))}
+            </div>
+
+            <Pagination className='mx-auto mb-5' shape="rounded" color='success' size="large" count={arrFiltrado.length} page={page} onChange={handleChange} />
+        </Stack>
+    );
 };
 
 export default CardProduct;
-
-
-
-
-
-{/* <div className="card p-2" style={{ width: '300px' }} key={cellPhone.id}>
-    <img className="w-75 mx-auto" src={cellPhone.thumbnail} alt=" logo da higia" />
-
-    <div className="pt-3 mx-auto text-center">
-        <h5>{cellPhone.title}</h5>
-        <p>Qtd. {cellPhone.sold_quantity}</p>
-    </div>
-
-    <div className="price text-center">
-        <h5>R$ {cellPhone.price}</h5>
-    </div>
-
-    <button type="button" className="btn btn-success py-2">
-        Adicionar <ShoppingCartIcon />
-    </button>
-</div> */}

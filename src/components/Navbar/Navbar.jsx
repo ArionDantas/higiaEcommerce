@@ -12,7 +12,7 @@ const Navbar = () => {
 
     return (
         <div className="fixed-top">
-            <nav className="navbar navbar-expand-md navbar-light bg-light py-3">
+            <nav className="navbar navbar-expand-md navbar-light bg-light pt-3 d-flex flex-column p-0">
                 <div className="d-flex container container-css">
 
                     <Link to={'/'} className='nav-link'>
@@ -52,7 +52,7 @@ const Navbar = () => {
                             <li className="nav-item d-flex align-items-center">
                                 <ShoppingCartIcon />
                                 {/* <a className="nav-link active" aria-current="page" href="#">Carrinho</a> */}
-                                <Link to={'/'} className='dropdown-item'>Carrinho</Link>
+                                <Link to={'/carrinho'} className='dropdown-item'>Carrinho</Link>
                             </li>
                             {/* <li className="nav-item d-flex align-items-center">
                                 <span className="material-symbols-outlined">shopping_basket</span>
@@ -61,10 +61,8 @@ const Navbar = () => {
                         </ul>
                     </div>
                 </div>
-            </nav>
 
-            <nav className="navbar navbar-expand-md navbar-light" style={styles}>
-                <div className="container container-css">
+                <div className="w-100 p-3" style={styles}>
                     <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                         <ul className="navbar-nav">
                             <li className="nav-item">
@@ -89,6 +87,8 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
+
+            
         </div>
     )
 }

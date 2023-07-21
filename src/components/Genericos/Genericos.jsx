@@ -1,11 +1,11 @@
 import React from 'react'
-import Content from '../Content/Content'
+import CardProduct from '../CardProduct/CardProduct'
 
 const Genericos = () => {
   return (
     <div className='content'>
       <h1>Aqui e genericos</h1>
-      <Content />
+      <CardProduct typeProduct={'medicamentos'} />
     </div>
   )
 }

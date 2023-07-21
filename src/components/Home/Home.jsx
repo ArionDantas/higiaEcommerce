@@ -7,8 +7,8 @@ import CardProduct from '../CardProduct/CardProduct'
 const Home = () => {
   return (
     <div className='content'>
-        <Content />
-        <CardProduct />
+        {/* <Content /> */}
+        <CardProduct typeProduct={'celulares'} />
     </div>
   )
 }
