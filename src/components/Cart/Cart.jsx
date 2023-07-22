@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getItem, setItem } from '../../services/LocalStorageFuncs';
 import { BsFillCartDashFill } from 'react-icons/bs';
-import { IoArrowBackCircleSharp } from 'react-icons/Io';
+import { IoArrowBackCircleSharp } from 'react-icons/io5';
 
 const Cart = () => {
     const [data, setData] = useState(getItem('cart') || []);
+    const [quantityProduct, setQuantityProduct] = useState(1)
 
     const removeItem = (obj) => {
         const arrFilter = data.filter((e) => e.id !== obj.id);
@@ -18,6 +19,15 @@ const Cart = () => {
     const moedaBrasileira = (value) => {
         return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
     }
+
+    const handleQuantityChange = (e) => {
+        console.log(e);
+        setQuantityProduct(e.target.value);
+      };
+
+    // const adicionarPropriedade = (data) => {
+
+    // }
 
     return (
         <div className='content container pt-5'>
@@ -58,7 +68,9 @@ const Cart = () => {
                                             name='txtQuantidade'
                                             id='quantidade'
                                             value={1}
-                                            min='1'
+                                            // value={quantityProduct}
+                                            min={1}
+                                            // onChange={handleQuantityChange}
                                         />
                                     </td>
 
@@ -82,13 +94,18 @@ const Cart = () => {
                         </tbody>
                     </table>
                 )}
-                <div className="d-flex justify-content-between align-content-center">
+                <div className="d-flex justify-content-between align-items-center my-5">
                     <div>
-                        <a href="#" class="btn btn-danger w-100">Escolher mais produtos</a>
+                        <Link className="text-decoration-none" to={'/'}>
+                            <div className="btn btn-danger p-3 w-100 d-flex align-items-center gap-2">
+                                <IoArrowBackCircleSharp  size={25}/>
+                                <p className='m-0' style={{textDecoration: 'none'}}>Escolher mais produtos</p>
+                            </div>
+                        </Link>
                     </div>
-                    <div class="preco w-100 d-flex justify-content-end mb-5">
-                        <div class="border rounded p-2 w-25 align-items-center">
-                            <div class="total d-flex justify-content-between align-items-center px-2 py-3 bg-primary text-white rounded">
+                    <div className="preco w-25">
+                        <div className="border rounded p-2">
+                            <div className="total d-flex justify-content-between align-items-center px-2 py-3 bg-primary text-white rounded">
                                 <div>
                                     <h6 className='m-0'>Total:</h6>
                                 </div>
@@ -96,11 +113,9 @@ const Cart = () => {
                                     <h6 className='m-0'>{moedaBrasileira(subTotal)}</h6>
                                 </div>
                             </div>
-                            <Link>
-                                <div class="formas-pagamento mt-3">
-                                    <a class="btn btn-success w-100">Finalizar compra</a>
-                                </div>
-                            </Link>
+                            <div className="formas-pagamento mt-3">
+                                <a className="btn btn-success w-100">Finalizar compra</a>
+                            </div>
                         </div>
                     </div>
                 </div>

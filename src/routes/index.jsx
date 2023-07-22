@@ -8,6 +8,8 @@ import Perfumaria from "../components/Perfumaria/Perfumaria";
 import Genericos from "../components/Genericos/Genericos";
 import Nutricao from "../components/Nutricao/Nutricao";
 import Cart from "../components/Cart/Cart";
+import SignUp from "../components/SignUp/SignUp";
+
 
 
 function RoutesApp() {
@@ -23,6 +25,7 @@ function RoutesApp() {
         <Route exact path="/genericos" element={<Genericos />} />
         <Route exact path="/nutricao" element={<Nutricao />} />
         <Route exact path="/carrinho" element={<Cart />} />
+        <Route exact path="/cadastro" element={<SignUp />} />
       </Routes>
     </Router>
   )
