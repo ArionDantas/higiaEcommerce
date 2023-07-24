@@ -33,8 +33,8 @@ const Navbar = () => {
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                        <ul className="navbar-nav mb-2 mb-lg-0 principal ms-5 gap-3">
-                            <li className="nav-item d-flex align-items-center">
+                        <ul className="navbar-nav mb-2 mb-lg-0 principal gap-3">
+                            <li className="nav-item d-flex">
                                 <div className="dropdown text-end">
                                     <a href="#" className="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         <PersonIcon />

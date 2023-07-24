@@ -51,6 +51,10 @@ function CardProduct({ typeProduct }) {
         exibirProdutosEmGrupos(MAX_LENGHT_PRODUCT);
     }, [cellPhones]); // Executa novamente quando o estado 'cellPhones' é atualizado
 
+    useEffect(() => {
+        window.scrollTo(0, 9999); // Define a posição do scroll para o topo da página
+      }, [page]);
+
     function fatiarArrayEmGrupos(arr, tamanhoDoGrupo) {
         const fatias = [];
         for (let i = 0; i < arr.length; i += tamanhoDoGrupo) {
@@ -68,8 +72,12 @@ function CardProduct({ typeProduct }) {
         }
     }
 
+    const moedaBrasileira = (value) => {
+        return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+    }
+
     return (
-        <Stack spacing={5}>
+        <Stack spacing={5} >
             <div className="d-flex justify-content-center align-itens-center gap-5 flex-wrap mt-5">
                 {/* Renderizar o conteúdo de arrFiltrado aqui */}
                 {arrFiltrado[page - 1]?.map((produto) => (  // Note o page - 1, pois a página inicia em 1, mas o array é baseado em índices (que começam em 0).
@@ -82,7 +90,7 @@ function CardProduct({ typeProduct }) {
                         </div>
 
                         <div className="price text-center">
-                            <h5>R$ {produto.price}</h5>
+                            <h5>{moedaBrasileira(produto.price)}</h5>
                         </div>
 
                         {

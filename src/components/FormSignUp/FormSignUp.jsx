@@ -113,7 +113,7 @@ const FormSignUp = () => {
 
                                 <div className="col">
                                     <div className="form-group mb-3">
-                                        <label git className='mb-2' htmlFor="birthDate">Birth Date:</label>
+                                        <label git className='mb-2' htmlFor="birthDate">Data de aniversário:</label>
                                         <input
                                             id="birthDate"
                                             className="form-control"

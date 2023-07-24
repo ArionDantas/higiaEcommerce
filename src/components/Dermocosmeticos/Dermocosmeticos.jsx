@@ -1,5 +1,5 @@
 import React from 'react'
-import Content from '../Content/Content'
+import CardProduct from '../CardProduct/CardProduct'
 
 function Dermocosmeticos() {
     return (
