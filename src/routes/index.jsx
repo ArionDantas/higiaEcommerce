@@ -9,7 +9,9 @@ import Genericos from "../components/Genericos/Genericos";
 import Nutricao from "../components/Nutricao/Nutricao";
 import Cart from "../components/Cart/Cart";
 import SignUp from "../components/SignUp/SignUp";
-
+import Login from "../components/Login/Login";
+import Profile from "../components/Profile/Profile";
+import ProfileEdit from "../components/ProfileEdit/ProfileEdit";
 
 
 function RoutesApp() {
@@ -19,6 +21,9 @@ function RoutesApp() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/conta" element={<Profile />} />
+        <Route exact path="/conta/editar" element={<ProfileEdit />} />
         <Route exact path="/medicamentos" element={<Medicamentos />} />
         <Route exact path="/dermocosmeticos" element={<Dermocosmeticos />} />
         <Route exact path="/perfumaria" element={<Perfumaria />} />

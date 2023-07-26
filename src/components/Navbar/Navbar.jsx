@@ -1,21 +1,32 @@
 import React from 'react'
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getItem } from '../../services/LocalStorageFuncs';
 
 
 const Navbar = () => {
 
+    const navigate = useNavigate();
+    const user = getItem('user')
+    // const name = null
+
     const styles = {
         backgroundColor: '#DDD',
     };
+
+    const handleExit = () => {
+        localStorage.clear();
+        navigate('/')
+        window.location.reload(true);
+    }
 
     return (
         <div className="fixed-top">
             <nav className="navbar navbar-expand-md navbar-light bg-light pt-3 d-flex flex-column p-0">
                 <div className="d-flex container container-css">
 
-                    <Link to={'/'} className='nav-link'>
+                    <Link to={'/'} className='nav-link' onClick={() => { window.location.reload() }}>
                         <div className="d-flex justify-content-center align-items-center gap-2">
                             <img src="src/img/logo-higia-bgremove.png" alt="Logo Farmácia Higia" style={{ width: '80px', height: '80px' }} />
                         </div>
@@ -29,23 +40,43 @@ const Navbar = () => {
                     </button>
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <form className="d-flex ms-auto">
+                        {/* <form className="d-flex ms-auto">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                        <ul className="navbar-nav mb-2 mb-lg-0 principal gap-3">
+                        </form> */}
+                        <ul className="navbar-nav mb-2 mb-lg-0 principal gap-3 ms-auto">
                             <li className="nav-item d-flex">
                                 <div className="dropdown text-end">
                                     <a href="#" className="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <PersonIcon />
-                                        Minha conta
+
+                                        {user !== null
+                                            ? (
+                                                // name = user.name.split(' ')
+                                                `${user.name}`)
+                                            : (<>
+                                                <PersonIcon />
+                                                Minha conta
+                                            </>)
+                                        }
                                     </a>
                                     <ul className="dropdown-menu text-small">
-                                        <li><Link to={'/'} className='dropdown-item'>Conta</Link></li>
-                                        <li><Link to={'/'} className='dropdown-item'>Configurações</Link></li>
-                                        <li><Link to={'/cadastro'} className='dropdown-item'>Cadastre-se</Link></li>
-                                        <li><hr className="dropdown-divider" /></li>
-                                        <li><Link to={'/'} className='dropdown-item text-danger'>Sair</Link></li>
+
+                                        {user ? (
+                                            <>
+
+                                                <li><Link to={'/conta'} className='dropdown-item'>Conta</Link></li>
+                                                <li><Link to={'/'} className='dropdown-item'>Configurações</Link></li>
+                                                <li><hr className="dropdown-divider" /></li>
+                                                <li><Link to={'/'} className='dropdown-item text-danger' onClick={handleExit}>Sair</Link></li>
+                                            </>
+                                        ) : (
+
+                                            <>
+                                                <li><Link to={'/login'} className='dropdown-item'>Login</Link></li>
+                                                <li><Link to={'/cadastro'} className='dropdown-item'>Cadastre-se</Link></li>
+                                            </>
+                                        )}
+
                                     </ul>
                                 </div>
                             </li>
@@ -88,7 +119,7 @@ const Navbar = () => {
                 </div>
             </nav>
 
-            
+
         </div>
     )
 }
