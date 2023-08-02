@@ -20,23 +20,66 @@ const Login = () => {
     }
   };
 
+  const style = {
+    width: '25%',
+    backgroundColor: '#ddd'
+  }
+
   console.log(name, pass);
 
   return (
-    <div className='content align-items-center'>
-      <p>Name</p>
-      <input type="text" onChange={({ target: { value } }) => setName(value)} value={name} />
+    <div className='content d-flex justify-content-center align-items-center'>
 
-      <p>Password</p>
-      <input type="password" onChange={({ target: { value } }) => setPass(value)} value={pass} />
+      <form action="#" className='border rounded px-4 pt-5 pb-3 mt-5 shadow' style={style}>
 
-      <button
-        type='button'
-        onClick={() => saveUser(name, pass)}
-        disabled={!cond}
-      >
-        Sign in
-      </button>
+        <div className='w-100 d-flex aling-items-center'> 
+          <img src="src/img/logo-higia-bgremove.png" alt="Logo higia" className="mx-auto" style={{ width: '100px', height: '100px' }} />
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <div className="form-group mb-3">
+              <label git className='mb-2' htmlFor="user">Usuário:</label>
+              <input
+                placeholder='Digite seu usuário'
+                id="user"
+                className="form-control"
+                type="text"
+                onChange={({ target: { value } }) => setName(value)} value={name}
+              />
+            </div>
+
+            <div className="form-group mb-3">
+              <label git className='mb-2' htmlFor="pass">Senha:</label>
+              <input
+                placeholder='Digite sua senha'
+                id="pass"
+                className="form-control"
+                type="password"
+                onChange={({ target: { value } }) => setPass(value)} value={pass}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* <p>Name</p>
+        <input type="text" onChange={({ target: { value } }) => setName(value)} value={name} />
+
+        <p>Password</p>
+        <input type="password" onChange={({ target: { value } }) => setPass(value)} value={pass} /> */}
+
+        <button
+          className='btn btn-success w-100 mt-5'
+          type='button'
+          onClick={() => saveUser(name, pass)}
+          disabled={!cond}
+        >
+          Login
+        </button>
+
+      </form>
+
+
     </div>
   );
 };

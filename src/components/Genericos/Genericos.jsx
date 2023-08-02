@@ -4,8 +4,8 @@ import CardProduct from '../CardProduct/CardProduct'
 const Genericos = () => {
   return (
     <div className='content'>
-      <h1>Aqui e genericos</h1>
-      <CardProduct typeProduct={'medicamentos'} />
+      <h5>Genéricos</h5>
+      <CardProduct typeProduct={'Genéricos'} />
     </div>
   )
 }

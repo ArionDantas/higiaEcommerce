@@ -1,6 +1,7 @@
 import React from "react"
 import Navbar from "../components/Navbar/Navbar"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import useAuth from "../hooks/useAuth";
 import Home from "../components/Home/Home";
 import Medicamentos from '../components/Medicamentos/Medicamentos'
 import Dermocosmeticos from '../components/Dermocosmeticos/Dermocosmeticos'
@@ -13,6 +14,12 @@ import Login from "../components/Login/Login";
 import Profile from "../components/Profile/Profile";
 import ProfileEdit from "../components/ProfileEdit/ProfileEdit";
 
+// const Private = ({ Item }) => {
+//   const { signed } = useAuth();
+
+//   return signed > 0 ? <Item /> : <Home />;
+// };
+
 
 function RoutesApp() {
 
@@ -20,7 +27,7 @@ function RoutesApp() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Medicamentos />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/conta" element={<Profile />} />
         <Route exact path="/conta/editar" element={<ProfileEdit />} />

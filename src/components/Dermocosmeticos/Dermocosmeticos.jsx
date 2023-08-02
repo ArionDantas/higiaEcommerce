@@ -1,11 +1,14 @@
 import React from 'react'
 import CardProduct from '../CardProduct/CardProduct'
 
+
 function Dermocosmeticos() {
+
+
     return (
         <div className='content'>
-            <h1>Aqui é dermocosmeticos</h1>
-            <CardProduct typeProduct={'dermocosmeticos'} />
+            <h5>Dermocosméticos</h5>
+            <CardProduct typeProduct={'Dermocosméticos'} />
         </div>
     )
 }

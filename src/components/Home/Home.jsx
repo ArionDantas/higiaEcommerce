@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className='content'>
         {/* <Content /> */}
-        <CardProduct typeProduct={'celulares'} />
+        <CardProduct apiKey={'https://api-farmacia-higia-java-d263a377630d.herokuapp.com/products/all'} />
     </div>
   )
 }

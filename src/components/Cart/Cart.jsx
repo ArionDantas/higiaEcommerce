@@ -6,7 +6,7 @@ import { IoArrowBackCircleSharp } from 'react-icons/io5';
 
 const Cart = () => {
     const [data, setData] = useState(getItem('cart') || []);
-    const [quantityProduct, setQuantityProduct] = useState(1)
+    // const [quantityProduct, setQuantityProduct] = useState(1)
 
     const removeItem = (obj) => {
         const arrFilter = data.filter((e) => e.id !== obj.id);
@@ -14,12 +14,15 @@ const Cart = () => {
         setItem('cart', arrFilter);
     };
 
-    const subTotal = data.reduce((acc, cur) => acc + cur.price, 0)
+    const subTotal = data.reduce((acc, cur) => acc + cur.value, 0)
 
     const moedaBrasileira = (value) => {
-        return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+        if (typeof value === 'number') {
+            return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+        } else {
+            return 'Valor inválido';
+        }
     }
-
     // const handleQuantityChange = (e) => {
     //     console.log(e);
     //     setQuantityProduct(e.target.value);
@@ -30,7 +33,7 @@ const Cart = () => {
     // }
 
     return (
-        <div className='content container pt-5'>
+        <div className='content pt-5'>
             <div >
                 {data.length === 0 ? (
                     <div className="d-flex flex-column align-items-center justify-content-center gap-5">
@@ -56,10 +59,10 @@ const Cart = () => {
                                         <td className='w-25'>
                                             <div className='row div-remedio d-flex justify-content-center align-items-center m-auto gap-1'>
                                                 <div className='col'>
-                                                    <img src={e.thumbnail} alt='remedio' style={{ width: '100px', height: '100px' }} />
+                                                    <img src={e.imgUrl} alt='remedio' style={{ width: '100px', height: '100px' }} />
                                                 </div>
                                                 <div className='col descricao-remedio'>
-                                                    <h6>{e.title}</h6>
+                                                    <h6>{e.description}</h6>
                                                     {/* <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae ab reprehenderit
                             quidem natus</p> */}
                                                 </div>
@@ -80,10 +83,10 @@ const Cart = () => {
                                         </td>
 
                                         <td style={{ verticalAlign: 'middle' }}>
-                                            <h6>{moedaBrasileira(e.price)}</h6>
+                                            <h6>{moedaBrasileira(e.value)}</h6>
                                         </td>
                                         <td style={{ verticalAlign: 'middle' }}>
-                                            <h6>{moedaBrasileira(e.price)}</h6>
+                                            <h6>{moedaBrasileira(e.value)}</h6>
                                         </td>
                                         <td style={{ verticalAlign: 'middle' }}>
                                             <button

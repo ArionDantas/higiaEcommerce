@@ -5,8 +5,8 @@ import CardProduct from '../CardProduct/CardProduct'
 const Nutricao = () => {
   return (
     <div className='content'>
-      <h1>Aqui e nutricao</h1>
-      <CardProduct typeProduct={'nutricao'} />
+      <h5>Nutrição</h5>
+      <CardProduct typeProduct={'Nutrição'} />
     </div>
   )
 }

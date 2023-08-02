@@ -10,5 +10,9 @@
   }
   
   .content {
-    margin-top: 168px;
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }

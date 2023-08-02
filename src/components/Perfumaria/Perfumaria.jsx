@@ -4,9 +4,9 @@ import CardProduct from '../CardProduct/CardProduct'
 const Perfumaria = () => {
   return (
     <div className='content'>
-        <h1>Aqui é perfumaria</h1>
+        <h5>Perfumaria</h5>
         {/* <Content /> */}
-        <CardProduct typeProduct={'perfumaria'} />
+        <CardProduct typeProduct={'Perfumaria'} />
     </div>
   )
 }
