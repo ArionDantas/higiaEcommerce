@@ -4,6 +4,8 @@ import { getItem, setItem } from '../../services/LocalStorageFuncs';
 import { BsFillCartDashFill } from 'react-icons/bs';
 import { IoArrowBackCircleSharp } from 'react-icons/io5';
 
+const imgURL1 = new URL('/src/img/empty-cart.svg', import.meta.url).href;
+
 const Cart = () => {
     const [data, setData] = useState(getItem('cart') || []);
     // const [quantityProduct, setQuantityProduct] = useState(1)
@@ -38,7 +40,7 @@ const Cart = () => {
                 {data.length === 0 ? (
                     <div className="d-flex flex-column align-items-center justify-content-center gap-5">
                         <h1 className='h1'>Carrinho está vazio</h1>
-                        <img src="src/img/empty-cart.svg" alt="Carrinho vazio" style={{width: '350px'}}/>
+                        <img src={imgURL1} alt="Carrinho vazio" style={{width: '350px'}}/>
                     </div>
                 ) : (
 

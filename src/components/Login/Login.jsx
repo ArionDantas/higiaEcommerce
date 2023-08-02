@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { getItem, setItem } from '../../services/LocalStorageFuncs';
 import { useNavigate } from 'react-router';
 
+const imgURL1 = new URL('/src/img/logo-higia-bgremove.png', import.meta.url).href;
+
 const Login = () => {
   const user = getItem('user') || {};
 
@@ -33,7 +35,7 @@ const Login = () => {
       <form action="#" className='border rounded px-4 pt-5 pb-3 mt-5 shadow' style={style}>
 
         <div className='w-100 d-flex aling-items-center'> 
-          <img src="src/img/logo-higia-bgremove.png" alt="Logo higia" className="mx-auto" style={{ width: '100px', height: '100px' }} />
+          <img src={imgURL1} alt="Logo higia" className="mx-auto" style={{ width: '100px', height: '100px' }} />
         </div>
 
         <div className="row">

@@ -3,6 +3,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link, useNavigate } from 'react-router-dom';
 import { getItem } from '../../services/LocalStorageFuncs';
+const imgURL1 = new URL('/src/img/logo-higia-bgremove.png', import.meta.url).href;
 
 
 const Navbar = () => {
@@ -33,7 +34,7 @@ const Navbar = () => {
 
                     <Link to={'/'} className='nav-link'>
                         <div className="d-flex justify-content-center align-items-center gap-2">
-                            <img src="src/img/logo-higia-bgremove.png" alt="Logo Farmácia Higia" style={{ width: '80px', height: '80px' }} />
+                            <img src={imgURL1} alt="Logo Farmácia Higia" style={{ width: '80px', height: '80px' }} />
                         </div>
                     </Link>
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 // import { storage } from "../../services/firebase";
 // import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+const imgURL1 = new URL('/src/img/sign-up.svg', import.meta.url).href;
 
 const FormSignUp = () => {
 
@@ -163,8 +164,9 @@ const FormSignUp = () => {
                     </div>
                 </div>
                 <div className="col d-flex justify-content-center align-items-center w-100">
-                    <img src="src/img/sign-up.svg" alt="SignUp" style={{ width: '500px' }} />
+                    <img src={imgURL1} alt="SignUp" style={{ width: '500px' }} />
                 </div>
+
             </div>
         </div>
     )
